@@ -10,8 +10,10 @@ COPY requirements.txt .
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the app directory into the container at /code
+# Copy the app, static, and templates directories into the container
 COPY ./app /code/app
+COPY ./static /code/static
+COPY ./templates /code/templates
 
 # Command to run the application
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
