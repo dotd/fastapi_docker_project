@@ -1,4 +1,4 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -30,7 +30,7 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 @app.get("/", response_class=HTMLResponse)
-async def read_root(request):
+async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.websocket("/ws/{client_id}")
